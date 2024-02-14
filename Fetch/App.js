@@ -1,26 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import NewList from './src/Components/NewList';
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import NewScrenn from "./src/Screen/NewScrenn";
+import RequestScreen from "./src/Screen/RequestScreen";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View >
-      <NewList/>
-     
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="NewScrenn" component={NewScrenn} />
+        <Tab.Screen name="RequestScreen" component={RequestScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text:{
-    fontSize:50,
-    fontWeight:'600'
-  }
-});
