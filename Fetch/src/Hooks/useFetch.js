@@ -22,16 +22,24 @@ export function useFetch(url) {
     error: null,
   });
   useEffect(() => {
+    let shouldCancel = false;
+
     const callFetch = async () => {
       dispatch({ type: "loading" });
       try {
         const response = await fetch(url);
         const responseJSON = await response.json();
+
+        if (shouldCancel) return;
+        dispatch({ type: "success", responseJSON });
       } catch (error) {
+        if (shouldCancel) return;
         dispatch({ type: "error", error });
       }
     };
     callFetch();
+    //evitar re-render
+    return () => (shouldCancel = true);
   }, []);
   return state;
 }
